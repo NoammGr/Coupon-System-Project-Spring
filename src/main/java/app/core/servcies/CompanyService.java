@@ -52,6 +52,7 @@ public class CompanyService extends ClientService {
         if (optional.isEmpty()) {
             if (couponRepository.findByTitle(coupon.getTitle()) == null) {
                 couponRepository.save(coupon);
+                System.out.println("Coupon added successfully !");
             }
         } else {
             throw new CouponSystemException("Check the coupon name and try again !");
@@ -65,14 +66,16 @@ public class CompanyService extends ClientService {
         }
         if (tempCoupon.getId() == coupon.getId() && tempCoupon.getCompany().getId() == coupon.getCompany().getId()) {
             couponRepository.save(coupon);
+            System.out.println("Coupon updated successfully !");
         } else {
             throw new CouponSystemException("you cannot change company id or coupon id ");
         }
     }
 
-    public void deleteCoupon(int couponId) throws CouponSystemException {
-        couponRepository.findById(couponId).orElseThrow(() -> new CouponSystemException("Coupon doesn't exist !"));
-        couponRepository.deleteById(couponId);
+    public void deleteCoupon(Coupon coupon) throws CouponSystemException {
+        couponRepository.findById(coupon.getId()).orElseThrow(() -> new CouponSystemException("Coupon doesn't exist !"));
+        couponRepository.deleteById(coupon.getId());
+        System.out.println("Coupon deleted successfully !");
     }
 
     public List<Coupon> getCompanyCoupons() throws CouponSystemException {

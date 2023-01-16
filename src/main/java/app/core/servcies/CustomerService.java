@@ -63,9 +63,9 @@ public class CustomerService extends ClientService {
         tempCoupon.setAmount(tempCoupon.getAmount() - 1);
     }
 
-    public List<Coupon> getCustomerCoupon(int id) throws CouponSystemException {
+    public List<Coupon> getCustomerCoupon() throws CouponSystemException {
         try {
-            return couponRepository.findByCustomersId(id);
+            return couponRepository.findByCustomersId(this.customer.getId());
         } catch (CouponSystemException e) {
             throw new CouponSystemException("Customer coupons doesn't found !" + e);
         }

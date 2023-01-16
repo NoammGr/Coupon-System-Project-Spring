@@ -63,6 +63,7 @@ public class AdminService extends ClientService {
             throw new CouponSystemException("It's impossible to change 'Company name' !");
         }
         companyRepository.save(company);
+        System.out.println("Company updated successfully !");
     }
 
     public void deleteCompany(Company company) throws CouponSystemException {
@@ -72,7 +73,8 @@ public class AdminService extends ClientService {
         for (Coupon coupon : coupons) {
             couponRepository.deleteById(coupon.getId());
         }
-        System.out.println("All coupons has been deleted ! ");
+        System.out.println("All company coupons has been deleted ! ");
+        System.out.println("Company deleted successfully !");
         companyRepository.deleteById(company.getId());
     }
 
@@ -94,6 +96,7 @@ public class AdminService extends ClientService {
     public void addCustomer(Customer customer) throws CouponSystemException {
         if (customerRepository.findByEmail(customer.getEmail()) == null) {
             customerRepository.save(customer);
+            System.out.println("Customer added successfully !");
         } else {
             throw new CouponSystemException("Customer already exist !");
         }
@@ -106,6 +109,7 @@ public class AdminService extends ClientService {
             throw new CouponSystemException("It's impossible to change 'Customer id' !");
         }
         customerRepository.save(customer);
+        System.out.println("Customer updated successfully !");
     }
 
     public void deleteCustomer(Customer customer) throws CouponSystemException {
@@ -118,7 +122,8 @@ public class AdminService extends ClientService {
             customerRepository.deleteById(coupon.getId());
         }
 
-        System.out.println("All coupons has been deleted ! ");
+        System.out.println("All customer coupons has been deleted ! ");
+        System.out.println("Customer deleted successfully !");
         customerRepository.deleteById(customer.getId());
     }
 
