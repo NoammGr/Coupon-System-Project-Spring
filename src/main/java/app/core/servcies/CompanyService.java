@@ -1,36 +1,24 @@
 package app.core.servcies;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import javax.transaction.Transactional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import app.core.entities.Category;
 import app.core.entities.Company;
 import app.core.entities.Coupon;
 import app.core.entities.CouponSystemException;
 import app.core.repositories.CompanyRepository;
 import app.core.repositories.CouponRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
 public class CompanyService extends ClientService {
 
     private Company company;
-
-    public CompanyService() {
-
-    }
-
-    public CompanyService(Company company) {
-        super();
-        this.company = company;
-    }
-
+    
     @Autowired
     private CompanyRepository companyRepository;
 

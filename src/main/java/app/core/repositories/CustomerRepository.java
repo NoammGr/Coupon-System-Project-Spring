@@ -9,12 +9,10 @@ import app.core.entities.Customer;
 
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
-	Customer findByEmailAndPassword(String email, String password);
+    Customer findByEmailAndPassword(String email, String password);
 
-	Customer findByEmail(String email);
+    Customer findByEmail(String email);
 
-	boolean existsById(int id);
-
-	boolean existsByEmailAndPassword(String email, String password);
+    boolean existsByEmailAndPassword(String email, String password);
 
 }

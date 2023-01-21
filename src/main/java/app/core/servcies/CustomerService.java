@@ -22,15 +22,6 @@ public class CustomerService extends ClientService {
 
     private Customer customer;
 
-    public CustomerService() {
-
-    }
-
-    public CustomerService(Customer customer) {
-        super();
-        this.customer = customer;
-    }
-
     @Autowired
     private CouponRepository couponRepository;
 

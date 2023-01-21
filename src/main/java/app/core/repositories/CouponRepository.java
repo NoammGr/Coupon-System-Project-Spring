@@ -9,13 +9,7 @@ import app.core.entities.Category;
 import app.core.entities.Coupon;
 
 public interface CouponRepository extends JpaRepository<Coupon, Integer> {
-
-    Coupon findByCategory(Category category);
-
-    Coupon findByEndDate(Date endDate);
-
-    Coupon findByPrice(double price);
-
+    
     Coupon findByTitle(String title);
 
     List<Coupon> findByCustomersId(int customers_Id);

@@ -14,7 +14,10 @@ import app.core.entities.Coupon;
 import app.core.entities.CouponSystemException;
 import app.core.repositories.CouponRepository;
 
+import javax.transaction.Transactional;
+
 @Component
+@Transactional
 public class CouponExpirationDailyJob {
 
     @Autowired

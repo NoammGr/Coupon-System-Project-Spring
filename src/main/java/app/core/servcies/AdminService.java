@@ -20,11 +20,7 @@ import app.core.repositories.CustomerRepository;
 @Service
 @Transactional
 public class AdminService extends ClientService {
-
-    public AdminService() {
-
-    }
-
+    
     @Autowired
     private CompanyRepository companyRepository;
 
