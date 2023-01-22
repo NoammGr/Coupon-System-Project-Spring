@@ -28,10 +28,12 @@ class CustomerServiceTest {
     @Test
     void purchaseCoupon() {
         System.out.println("Test 2 started !");
-        String email = "EldarJB@gmail.com";
-        String password = "12314321";
+        String email = "NoamDov@gmail.com";
+        String password = "12343123";
         customerService.login(email, password);
-        assertAll(() -> customerService.purchaseCoupon(5));
+        assertAll(() -> customerService.purchaseCoupon(1));
+        assertAll(() -> customerService.purchaseCoupon(2));
+        assertAll(() -> customerService.purchaseCoupon(3));
         System.out.println("Test 2 completed !");
     }
 

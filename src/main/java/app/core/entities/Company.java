@@ -24,22 +24,20 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(of = "id")
 public class Company {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	private String name;
-	@Column(unique = true)
-	private String email;
-	private String password;
-	@OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<Coupon> coupons = new ArrayList<>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String name;
+    @Column(unique = true)
+    private String email;
+    private String password;
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Coupon> coupons = new ArrayList<>();
 
-//	private Coupon coupon;
-
-	public Company(int id, String name, String email, String password) {
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.password = password;
-	}
+    public Company(int id, String name, String email, String password) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
 }

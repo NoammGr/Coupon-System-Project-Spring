@@ -20,7 +20,7 @@ import app.core.repositories.CustomerRepository;
 @Service
 @Transactional
 public class AdminService extends ClientService {
-    
+
     @Autowired
     private CompanyRepository companyRepository;
 
@@ -63,9 +63,9 @@ public class AdminService extends ClientService {
     }
 
     public void deleteCompany(Company company) throws CouponSystemException {
-        Company comp = companyRepository.findById(company.getId())
+        companyRepository.findById(company.getId())
                 .orElseThrow(() -> new CouponSystemException("Company doesn't exist !"));
-        List<Coupon> coupons = new ArrayList<>(comp.getCoupons());
+        List<Coupon> coupons = new ArrayList<>(couponRepository.findAllCouponsByCompanyId(company.getId()));
         for (Coupon coupon : coupons) {
             couponRepository.deleteById(coupon.getId());
         }
@@ -109,15 +109,12 @@ public class AdminService extends ClientService {
     }
 
     public void deleteCustomer(Customer customer) throws CouponSystemException {
-        Customer custom = customerRepository.findById(customer.getId())
+        customerRepository.findById(customer.getId())
                 .orElseThrow(() -> new CouponSystemException("Customer doesn't exist !"));
-        List<Coupon> coupons = new ArrayList<>(custom.getCoupons());
-
+        List<Coupon> coupons = new ArrayList<>(couponRepository.findAllCouponsByCustomersId(customer.getId()));
         for (Coupon coupon : coupons) {
-            customer.getCoupons().remove(coupon.getId());
-            customerRepository.deleteById(coupon.getId());
+            couponRepository.deleteById(coupon.getId());
         }
-
         System.out.println("All customer coupons has been deleted ! ");
         System.out.println("Customer deleted successfully !");
         customerRepository.deleteById(customer.getId());

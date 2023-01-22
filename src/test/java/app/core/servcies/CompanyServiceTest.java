@@ -18,10 +18,14 @@ class CompanyServiceTest {
     Company company1 = new Company(1, "aaa", "aaabbb@gmail.com", "aaaabbbb");
 
     Category category = Category.Restaurant;
-    String s = "2023-01-22";
+    Category category1 = Category.Food;
+    Category category2 = Category.Electricity;
+    String s = "2023-01-23";
     Date date = Date.valueOf(s);
 
-    Coupon coupon = new Coupon(3, company1, category, "Discount on cloth ! ", "60% less on price ! ", date, date, 200, 1000, "image");
+    Coupon coupon = new Coupon(1, company1, category, "Discount on supermarket ! ", "60% less on price ! ", date, date, 200, 1000, "image");
+    Coupon coupon1 = new Coupon(0, company1, category1, "Discount on chef meal ! ", "60% less on price ! ", date, date, 200, 1000, "image");
+    Coupon coupon2 = new Coupon(0, company1, category2, "Discount on toaster oven ! ", "60% less on price ! ", date, date, 200, 1000, "image");
 
     @Test
     void login() {
@@ -36,6 +40,8 @@ class CompanyServiceTest {
     void addCoupon() {
         System.out.println("Test 2 started !");
         assertAll(() -> companyService.addCoupon(coupon));
+        assertAll(() -> companyService.addCoupon(coupon1));
+        assertAll(() -> companyService.addCoupon(coupon2));
         System.out.println("Test 2 completed !");
     }
 

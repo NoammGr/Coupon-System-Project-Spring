@@ -77,10 +77,18 @@ class CouponRepositoryTest {
 
     @Test
     @Transactional
-    void deleteByEndDateAfter() {
+    void deleteByEndDateBefore() {
         System.out.println("Test 9 started !");
         java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-        assertAll(() -> couponRepository.deleteByEndDateAfter(date));
+        assertAll(() -> couponRepository.deleteByEndDateBefore(date));
         System.out.println("Test 9 completed !");
     }
+
+    @Test
+    void deleteById() {
+        System.out.println("Test 10 started !");
+        assertAll(() -> couponRepository.deleteById(2));
+        System.out.println("Test 10 completed !");
+    }
+
 }

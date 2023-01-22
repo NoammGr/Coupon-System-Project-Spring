@@ -9,7 +9,7 @@ import app.core.entities.Category;
 import app.core.entities.Coupon;
 
 public interface CouponRepository extends JpaRepository<Coupon, Integer> {
-    
+
     Coupon findByTitle(String title);
 
     List<Coupon> findByCustomersId(int customers_Id);
@@ -26,6 +26,5 @@ public interface CouponRepository extends JpaRepository<Coupon, Integer> {
 
     List<Coupon> findAllByCompanyIdAndPriceLessThan(int company_Id, double maxPrice);
 
-    void deleteByEndDateAfter(Date endDate);
-
+    void deleteByEndDateBefore(Date endDate);
 }

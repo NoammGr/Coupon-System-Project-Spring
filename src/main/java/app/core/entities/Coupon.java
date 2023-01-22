@@ -33,7 +33,7 @@ public class Coupon {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @ToString.Exclude
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "company_id", referencedColumnName = "id", nullable = false)
     private Company company;
     private Category category;
@@ -46,14 +46,11 @@ public class Coupon {
     private String image;
 
     @ToString.Exclude
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
-            CascadeType.REFRESH}, fetch = FetchType.EAGER)
-    @JoinTable(name = "customer_coupon", joinColumns = {@JoinColumn(name = "coupon_id")}, inverseJoinColumns = {
-            @JoinColumn(name = "customer_id")})
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    @JoinTable(name = "customer_coupon", joinColumns = {@JoinColumn(name = "coupon_id")}, inverseJoinColumns = {@JoinColumn(name = "customer_id")})
     private List<Customer> customers;
 
-    public Coupon(int id, Company company, Category category, String title, String description, Date startDate,
-                  Date endDate, int amount, double price, String image) {
+    public Coupon(int id, Company company, Category category, String title, String description, Date startDate, Date endDate, int amount, double price, String image) {
         super();
         this.id = id;
         this.company = company;

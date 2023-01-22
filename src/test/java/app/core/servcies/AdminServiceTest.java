@@ -1,10 +1,13 @@
 package app.core.servcies;
 
 import app.core.entities.Company;
+import app.core.entities.Coupon;
 import app.core.entities.Customer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,8 +16,9 @@ class AdminServiceTest {
     @Autowired
     AdminService adminService;
 
-    Company company1 = new Company(13, "aaa", "ShatoZiser@gmail.com", "aaa");
-    Customer customer1 = new Customer(3, "Oron", "Haggai", "OronZiser@gmail.com", "12343123");
+    Company company1 = new Company(1, "Intel", "Intel@gmail.com", "aaabbb");
+    List<Coupon> coupons;
+    Customer customer1 = new Customer(1, "Noam", "Dov", "NoamDov@gmail.com", "12343123", coupons);
 
 
     @Test

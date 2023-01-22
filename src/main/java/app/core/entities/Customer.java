@@ -27,28 +27,28 @@ import lombok.ToString;
 //@ToString(exclude = "coupons")
 public class Customer {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	private String firstName;
-	private String lastName;
-	@Column(unique = true)
-	private String email;
-	private String password;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String firstName;
+    private String lastName;
+    @Column(unique = true)
+    private String email;
+    private String password;
 
-	@ManyToMany(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
-			CascadeType.REFRESH }, fetch = FetchType.EAGER)
-	@JoinTable(name = "customer_coupon", joinColumns = { @JoinColumn(name = "customer_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "coupon_id") })
-	private List<Coupon> coupons;
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+            CascadeType.REFRESH, CascadeType.REMOVE}, fetch = FetchType.EAGER)
+    @JoinTable(name = "customer_coupon", joinColumns = {@JoinColumn(name = "customer_id")}, inverseJoinColumns = {
+            @JoinColumn(name = "coupon_id")})
+    private List<Coupon> coupons;
 
-	public Customer(int id, String firstName, String lastName, String email, String password) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.password = password;
-	}
+    public Customer(int id, String firstName, String lastName, String email, String password) {
+        super();
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+    }
 
 }
