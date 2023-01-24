@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +19,7 @@ import java.util.Optional;
 public class CompanyService extends ClientService {
 
     private Company company;
-    
+
     @Autowired
     private CompanyRepository companyRepository;
 
@@ -38,6 +39,10 @@ public class CompanyService extends ClientService {
     public void addCoupon(Coupon coupon) throws CouponSystemException {
         Optional<Coupon> optional = couponRepository.findById(coupon.getId());
         if (optional.isEmpty()) {
+            java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+            if (coupon.getEndDate().equals(date)) {
+                throw new CouponSystemException("Coupon passed deadline");
+            }
             if (couponRepository.findByTitle(coupon.getTitle()) == null) {
                 couponRepository.save(coupon);
                 System.out.println("Coupon added successfully !");
