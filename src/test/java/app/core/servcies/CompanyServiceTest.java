@@ -21,7 +21,7 @@ class CompanyServiceTest {
     Category category1 = Category.Food;
     Category category2 = Category.Electricity;
     String startDate = "2023-01-15";
-    String endDate = "2023-01-22";
+    String endDate = "2023-01-25";
     Date start = Date.valueOf(startDate);
     Date end = Date.valueOf(endDate);
 

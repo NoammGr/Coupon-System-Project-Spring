@@ -40,7 +40,7 @@ public class CompanyService extends ClientService {
         Optional<Coupon> optional = couponRepository.findById(coupon.getId());
         if (optional.isEmpty()) {
             java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-            if (coupon.getEndDate().equals(date)) {
+            if (coupon.getEndDate().before(date)) {
                 throw new CouponSystemException("Coupon passed deadline");
             }
             if (couponRepository.findByTitle(coupon.getTitle()) == null) {
