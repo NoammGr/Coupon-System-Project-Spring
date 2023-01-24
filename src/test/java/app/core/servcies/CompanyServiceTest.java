@@ -20,12 +20,14 @@ class CompanyServiceTest {
     Category category = Category.Restaurant;
     Category category1 = Category.Food;
     Category category2 = Category.Electricity;
-    String s = "2023-01-23";
-    Date date = Date.valueOf(s);
+    String startDate = "2023-01-15";
+    String endDate = "2023-01-22";
+    Date start = Date.valueOf(startDate);
+    Date end = Date.valueOf(endDate);
 
-    Coupon coupon = new Coupon(1, company1, category, "Discount on supermarket ! ", "60% less on price ! ", date, date, 200, 1000, "image");
-    Coupon coupon1 = new Coupon(0, company1, category1, "Discount on chef meal ! ", "60% less on price ! ", date, date, 200, 1000, "image");
-    Coupon coupon2 = new Coupon(0, company1, category2, "Discount on toaster oven ! ", "60% less on price ! ", date, date, 200, 1000, "image");
+    Coupon coupon = new Coupon(1, company1, category, "Discount on supermarket ! ", "60% less on price ! ", start, end, 200, 1000, "image");
+    Coupon coupon1 = new Coupon(0, company1, category1, "Discount on chef meal ! ", "60% less on price ! ", start, end, 200, 1000, "image");
+    Coupon coupon2 = new Coupon(0, company1, category2, "Discount on toaster oven ! ", "60% less on price ! ", start, end, 200, 1000, "image");
 
     @Test
     void login() {

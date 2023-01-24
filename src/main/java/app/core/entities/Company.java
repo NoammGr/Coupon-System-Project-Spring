@@ -31,7 +31,7 @@ public class Company {
     @Column(unique = true)
     private String email;
     private String password;
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "company", cascade = CascadeType.MERGE, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Coupon> coupons = new ArrayList<>();
 
     public Company(int id, String name, String email, String password) {
