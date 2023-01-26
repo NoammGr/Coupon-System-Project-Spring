@@ -36,8 +36,7 @@ public class Customer {
     private String email;
     private String password;
 
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
-            CascadeType.REFRESH, CascadeType.REMOVE}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.DETACH}, fetch = FetchType.EAGER)
     @JoinTable(name = "customer_coupon", joinColumns = {@JoinColumn(name = "customer_id")}, inverseJoinColumns = {
             @JoinColumn(name = "coupon_id")})
     private List<Coupon> coupons;
