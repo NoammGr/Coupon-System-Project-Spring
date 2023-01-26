@@ -7,45 +7,47 @@ import app.core.servcies.AdminService;
 import app.core.servcies.ClientService;
 import app.core.servcies.CompanyService;
 import app.core.servcies.CustomerService;
+import org.springframework.stereotype.Component;
 
+@Component
 public class LoginManager {
 
-	@Autowired
-	AdminService adminService;
+    @Autowired
+    AdminService adminService;
 
-	@Autowired
-	CompanyService companyService;
+    @Autowired
+    CompanyService companyService;
 
-	@Autowired
-	CustomerService customerService;
+    @Autowired
+    CustomerService customerService;
 
-	public LoginManager() {
+    public LoginManager() {
 
-	}
+    }
 
-	private static LoginManager instance;
+    private static LoginManager instance;
 
-	public static LoginManager getInstance() throws CouponSystemException {
-		if (instance == null) {
-			instance = new LoginManager();
-		}
-		return instance;
-	}
+    public static LoginManager getInstance() throws CouponSystemException {
+        if (instance == null) {
+            instance = new LoginManager();
+        }
+        return instance;
+    }
 
-	public ClientService login(String name, String password, ClientType client) throws CouponSystemException {
+    public ClientService login(String name, String password, ClientType client) throws CouponSystemException {
 
-		if (client == (ClientType.Administrator)) {
-			return this.adminService;
-		}
+        if (client == (ClientType.Administrator)) {
+            return this.adminService;
+        }
 
-		if (client == (ClientType.Company)) {
-			return this.companyService;
-		}
+        if (client == (ClientType.Company)) {
+            return this.companyService;
+        }
 
-		if (client == (ClientType.Customer)) {
-			return this.customerService;
-		}
-		throw new CouponSystemException("Wrong email or password please try again !");
-	}
+        if (client == (ClientType.Customer)) {
+            return this.customerService;
+        }
+        throw new CouponSystemException("Wrong email or password please try again !");
+    }
 
 }
