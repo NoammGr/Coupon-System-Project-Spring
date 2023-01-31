@@ -1,4 +1,4 @@
-package app.core.entities;
+package app.core.exceptions;
 
 public class CouponSystemException extends RuntimeException {
 

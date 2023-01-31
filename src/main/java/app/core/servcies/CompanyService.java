@@ -3,7 +3,7 @@ package app.core.servcies;
 import app.core.entities.Category;
 import app.core.entities.Company;
 import app.core.entities.Coupon;
-import app.core.entities.CouponSystemException;
+import app.core.exceptions.CouponSystemException;
 import app.core.repositories.CompanyRepository;
 import app.core.repositories.CouponRepository;
 import org.springframework.beans.factory.annotation.Autowired;

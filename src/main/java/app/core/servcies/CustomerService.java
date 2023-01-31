@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import app.core.entities.Category;
 import app.core.entities.Coupon;
-import app.core.entities.CouponSystemException;
+import app.core.exceptions.CouponSystemException;
 import app.core.entities.Customer;
 import app.core.repositories.CouponRepository;
 import app.core.repositories.CustomerRepository;
