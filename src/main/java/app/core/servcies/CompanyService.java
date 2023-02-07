@@ -54,9 +54,6 @@ public class CompanyService extends ClientService {
 
     public void updateCoupon(Coupon coupon) throws CouponSystemException {
         Coupon tempCoupon = couponRepository.findById(coupon.getId()).orElseThrow(() -> new CouponSystemException("Coupon doesn't exist !"));
-        if (tempCoupon.getTitle() == null) {
-            System.out.println("Coupon doesn't exist !");
-        }
         if (tempCoupon.getId() == coupon.getId() && tempCoupon.getCompany().getId() == coupon.getCompany().getId()) {
             couponRepository.save(coupon);
             System.out.println("Coupon updated successfully !");

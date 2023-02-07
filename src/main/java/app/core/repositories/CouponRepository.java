@@ -16,11 +16,15 @@ public interface CouponRepository extends JpaRepository<Coupon, Integer> {
 
     List<Coupon> findAllCouponsByCustomersId(int customerId);
 
+    void deleteAllCouponsByCustomersId(int customerId);
+
     List<Coupon> findByCustomersIdAndCategory(int customers_Id, Category category);
 
     List<Coupon> findByCustomersIdAndPriceLessThan(int customers_Id, double price);
 
     List<Coupon> findAllCouponsByCompanyId(int companyId);
+
+    void deleteAllCouponsByCompanyId(int companyId);
 
     List<Coupon> findAllByCompanyIdAndCategory(int company_Id, Category category);
 

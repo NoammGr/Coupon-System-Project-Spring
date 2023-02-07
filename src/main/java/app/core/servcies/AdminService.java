@@ -40,18 +40,18 @@ public class AdminService extends ClientService {
     }
 
     public void addCompany(Company company) throws CouponSystemException {
-        Optional<Company> optional = companyRepository.findById(company.getId());
-        if (optional.isEmpty()) {
-            companyRepository.save(company);
-            System.out.println("Success");
-        } else {
+        if (companyRepository.existsByEmail(company.getEmail())) {
             throw new CouponSystemException("company already exists ! ");
         }
+        if (companyRepository.existsByName(company.getName())) {
+            throw new CouponSystemException("company name can't be the same to other company name ! ");
+        }
+        companyRepository.save(company);
+        System.out.println("Success");
     }
 
     public void updateCompany(Company company) throws CouponSystemException {
-        Company comp = companyRepository.findById(company.getId())
-                .orElseThrow(() -> new CouponSystemException("Company doesn't exist !"));
+        Company comp = companyRepository.findById(company.getId()).orElseThrow(() -> new CouponSystemException("Company doesn't exist !"));
         if (company.getId() != comp.getId()) {
             throw new CouponSystemException("It's impossible to change 'Company id' !");
         }
@@ -63,15 +63,11 @@ public class AdminService extends ClientService {
     }
 
     public void deleteCompany(Company company) throws CouponSystemException {
-        companyRepository.findById(company.getId())
-                .orElseThrow(() -> new CouponSystemException("Company doesn't exist !"));
-        List<Coupon> coupons = new ArrayList<>(couponRepository.findAllCouponsByCompanyId(company.getId()));
-        for (Coupon coupon : coupons) {
-            couponRepository.deleteById(coupon.getId());
-        }
+        companyRepository.findById(company.getId()).orElseThrow(() -> new CouponSystemException("Company doesn't exist !"));
+        couponRepository.deleteAllCouponsByCompanyId(company.getId());
         System.out.println("All company coupons has been deleted ! ");
-        System.out.println("Company deleted successfully !");
         companyRepository.deleteById(company.getId());
+        System.out.println("Company deleted successfully !");
     }
 
     public List<Company> getAllCompanies() throws CouponSystemException {
@@ -85,22 +81,19 @@ public class AdminService extends ClientService {
     }
 
     public Company getOneCompany(int companyId) throws CouponSystemException {
-        return companyRepository.findById(companyId)
-                .orElseThrow(() -> new CouponSystemException("Company doesn't exist !"));
+        return companyRepository.findById(companyId).orElseThrow(() -> new CouponSystemException("Company doesn't exist !"));
     }
 
     public void addCustomer(Customer customer) throws CouponSystemException {
-        if (customerRepository.findByEmail(customer.getEmail()) == null) {
-            customerRepository.save(customer);
-            System.out.println("Customer added successfully !");
-        } else {
+        if (customerRepository.existsByEmail(customer.getEmail())) {
             throw new CouponSystemException("Customer already exist !");
         }
+        customerRepository.save(customer);
+        System.out.println("Customer added successfully !");
     }
 
     public void updateCustomer(Customer customer) throws CouponSystemException {
-        Customer custom = customerRepository.findById(customer.getId())
-                .orElseThrow(() -> new CouponSystemException("Customer doesn't exist !"));
+        Customer custom = customerRepository.findById(customer.getId()).orElseThrow(() -> new CouponSystemException("Customer doesn't exist !"));
         if (customer.getId() != custom.getId()) {
             throw new CouponSystemException("It's impossible to change 'Customer id' !");
         }
@@ -109,15 +102,11 @@ public class AdminService extends ClientService {
     }
 
     public void deleteCustomer(Customer customer) throws CouponSystemException {
-        customerRepository.findById(customer.getId())
-                .orElseThrow(() -> new CouponSystemException("Customer doesn't exist !"));
-        List<Coupon> coupons = new ArrayList<>(couponRepository.findAllCouponsByCustomersId(customer.getId()));
-        for (Coupon coupon : coupons) {
-            couponRepository.deleteById(coupon.getId());
-        }
+        customerRepository.findById(customer.getId()).orElseThrow(() -> new CouponSystemException("Customer doesn't exist !"));
+        couponRepository.deleteAllCouponsByCustomersId(customer.getId());
         System.out.println("All customer coupons has been deleted ! ");
-        System.out.println("Customer deleted successfully !");
         customerRepository.deleteById(customer.getId());
+        System.out.println("Customer deleted successfully !");
     }
 
     public List<Customer> getAllCustomers() throws CouponSystemException {
@@ -125,14 +114,13 @@ public class AdminService extends ClientService {
         try {
             customers = new ArrayList<>(customerRepository.findAll());
         } catch (Exception e) {
-            throw new CouponSystemException("Function error !", e);
+            throw new CouponSystemException("error in getting all customers method !", e);
         }
         return customers;
     }
 
     public Customer getOneCustomer(int customerId) throws CouponSystemException {
-        return customerRepository.findById(customerId)
-                .orElseThrow(() -> new CouponSystemException("Customer doesn't exist !"));
+        return customerRepository.findById(customerId).orElseThrow(() -> new CouponSystemException("Customer doesn't exist !"));
     }
 
 }
