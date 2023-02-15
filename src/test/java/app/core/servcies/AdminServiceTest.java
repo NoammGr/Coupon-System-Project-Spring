@@ -17,8 +17,10 @@ class AdminServiceTest {
     AdminService adminService;
 
     Company company1 = new Company(1, "Intel", "Intel@gmail.com", "aaabbb");
+    Company company2 = new Company(0, "Applied Materials", "AMAT@gmail.com", "aaabbb");
     List<Coupon> coupons;
-    Customer customer1 = new Customer(1, "Noam", "Dov", "NoamDov@gmail.com", "12343123", coupons);
+    Customer customer1 = new Customer(0, "Noam", "Dov", "NoamDov@gmail.com", "12343123", coupons);
+    Customer customer2 = new Customer(0, "Dov", "Noam", "DovNoam@gmail.com", "12343123", coupons);
 
 
     @Test
@@ -34,6 +36,7 @@ class AdminServiceTest {
     void addCompany() {
         System.out.println("Test 2 started !");
         assertAll(() -> adminService.addCompany(company1));
+        assertAll(() -> adminService.addCompany(company2));
         System.out.println("Test 2 completed !");
     }
 
@@ -61,7 +64,7 @@ class AdminServiceTest {
     @Test
     void getOneCompany() {
         System.out.println("Test 6 started !");
-        assertAll(() -> System.out.println(adminService.getOneCompany(1)));
+        assertAll(() -> System.out.println(adminService.getOneCompany(3)));
         System.out.println("Test 6 completed !");
     }
 
@@ -69,6 +72,7 @@ class AdminServiceTest {
     void addCustomer() {
         System.out.println("Test 7 started !");
         assertAll(() -> adminService.addCustomer(customer1));
+        assertAll(() -> adminService.addCustomer(customer2));
         System.out.println("Test 7 completed !");
     }
 
@@ -83,6 +87,7 @@ class AdminServiceTest {
     void deleteCustomer() {
         System.out.println("Test 9 started !");
         assertAll(() -> adminService.deleteCustomer(customer1));
+        assertAll(() -> adminService.deleteCustomer(customer2));
         System.out.println("Test 9 completed !");
     }
 

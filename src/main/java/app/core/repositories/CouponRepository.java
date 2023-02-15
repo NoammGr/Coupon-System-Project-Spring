@@ -30,5 +30,10 @@ public interface CouponRepository extends JpaRepository<Coupon, Integer> {
 
     List<Coupon> findAllByCompanyIdAndPriceLessThan(int company_Id, double maxPrice);
 
+    Boolean existsByCompanyIdAndTitle(int companyId, String title);
+
     void deleteByEndDateBefore(Date endDate);
+
+    boolean existsByCustomersIdAndId(int customerId, int couponId);
+
 }

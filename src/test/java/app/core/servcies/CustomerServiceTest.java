@@ -19,8 +19,8 @@ class CustomerServiceTest {
     @Test
     void login() {
         System.out.println("Test 1 started !");
-        String email = "EldarJB@gmail.com";
-        String password = "12314321";
+        String email = "NoamDov@gmail.com";
+        String password = "12343123";
         assertTrue(customerService.login(email, password));
         System.out.println("Test 1 completed !");
     }
@@ -28,20 +28,22 @@ class CustomerServiceTest {
     @Test
     void purchaseCoupon() {
         System.out.println("Test 2 started !");
-        String email = "NoamDov@gmail.com";
+        String email = "DovNoam@gmail.com";
         String password = "12343123";
         customerService.login(email, password);
         assertAll(() -> customerService.purchaseCoupon(1));
         assertAll(() -> customerService.purchaseCoupon(2));
         assertAll(() -> customerService.purchaseCoupon(3));
+        assertAll(() -> customerService.purchaseCoupon(4));
+        assertAll(() -> customerService.purchaseCoupon(5));
         System.out.println("Test 2 completed !");
     }
 
     @Test
     void getCustomerCoupon() {
         System.out.println("Test 3 started !");
-        String email = "EldarJB@gmail.com";
-        String password = "12314321";
+        String email = "DovNoam@gmail.com";
+        String password = "12343123";
         customerService.login(email, password);
         assertAll(() -> System.out.println(customerService.getCustomerCoupon()));
         System.out.println("Test 3 completed !");
@@ -50,8 +52,8 @@ class CustomerServiceTest {
     @Test
     void testGetCustomerCoupon() {
         System.out.println("Test 4 started !");
-        String email = "EldarJB@gmail.com";
-        String password = "12314321";
+        String email = "DovNoam@gmail.com";
+        String password = "12343123";
         customerService.login(email, password);
         assertAll(() -> System.out.println(customerService.getCustomerCoupon(category)));
         System.out.println("Test 4 completed !");
@@ -60,8 +62,8 @@ class CustomerServiceTest {
     @Test
     void testGetCustomerCoupon1() {
         System.out.println("Test 5 started !");
-        String email = "EldarJB@gmail.com";
-        String password = "12314321";
+        String email = "DovNoam@gmail.com";
+        String password = "12343123";
         customerService.login(email, password);
         assertAll(() -> System.out.println(customerService.getCustomerCoupon(1001)));
         System.out.println("Test 5 completed !");
@@ -70,8 +72,8 @@ class CustomerServiceTest {
     @Test
     void getCustomerDetails() {
         System.out.println("Test 6 started !");
-        String email = "EldarJB@gmail.com";
-        String password = "12314321";
+        String email = "DovNoam@gmail.com";
+        String password = "12343123";
         customerService.login(email, password);
         assertAll(() -> System.out.println(customerService.getCustomerDetails()));
         System.out.println("Test 6 completed !");

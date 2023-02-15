@@ -43,12 +43,11 @@ public class CompanyService extends ClientService {
             if (coupon.getEndDate().before(date)) {
                 throw new CouponSystemException("Coupon passed deadline");
             }
-            if (couponRepository.findByTitle(coupon.getTitle()) == null) {
-                couponRepository.save(coupon);
-                System.out.println("Coupon added successfully !");
+            if (couponRepository.existsByCompanyIdAndTitle(coupon.getCompany().getId(), coupon.getTitle())) {
+                throw new CouponSystemException("Check the coupon name and try again !");
             }
-        } else {
-            throw new CouponSystemException("Check the coupon name and try again !");
+            couponRepository.save(coupon);
+            System.out.println("Coupon added successfully !");
         }
     }
 
