@@ -57,7 +57,7 @@ public class CompanyService extends ClientService {
             couponRepository.save(coupon);
             System.out.println("Coupon updated successfully !");
         } else {
-            throw new CouponSystemException("you cannot change company id or coupon id ");
+            throw new CouponSystemException("You cannot change company id or coupon id ");
         }
     }
 

@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -43,7 +44,9 @@ public class Coupon {
     private Category category;
     private String title;
     private String description;
+    @NotNull
     private Date startDate;
+    @NotNull
     private Date endDate;
     private int amount;
     private double price;

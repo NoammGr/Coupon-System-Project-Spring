@@ -75,7 +75,7 @@ public class AdminService extends ClientService {
         try {
             companies = new ArrayList<>(companyRepository.findAll());
         } catch (Exception e) {
-            throw new CouponSystemException("Function error !", e);
+            throw new CouponSystemException("Error in getting all companies method !", e);
         }
         return companies;
     }
@@ -114,7 +114,7 @@ public class AdminService extends ClientService {
         try {
             customers = new ArrayList<>(customerRepository.findAll());
         } catch (Exception e) {
-            throw new CouponSystemException("error in getting all customers method !", e);
+            throw new CouponSystemException("Error in getting all customers method !", e);
         }
         return customers;
     }

@@ -2,6 +2,7 @@ package app.core.tests;
 
 import java.sql.Date;
 
+import app.core.connectionsystem.LoginManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,9 @@ import app.core.servcies.CustomerService;
 
 @Component
 public class Test implements CommandLineRunner {
+
+//    @Autowired
+//    private LoginManager loginManager;
 
 //    @Autowired
 //    private AdminService adminService;

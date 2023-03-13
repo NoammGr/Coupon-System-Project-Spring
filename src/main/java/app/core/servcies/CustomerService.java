@@ -44,7 +44,7 @@ public class CustomerService extends ClientService {
         Customer customer = customerRepository.findById(this.customer.getId())
                 .orElseThrow(() -> new CouponSystemException("Customer not found"));
         java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-        if (couponRepository.existsByCustomersIdAndId(customer.getId(), tempCoupon.getId())) {
+        if (couponRepository.existsByCustomersIdAndId(this.customer.getId(), tempCoupon.getId())) {
             throw new CouponSystemException("You cannot buy the same coupon twice !");
         }
         if (tempCoupon.getEndDate().before(date)) {
