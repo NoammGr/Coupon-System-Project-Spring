@@ -1,5 +1,7 @@
 package app.core.servcies;
 
+import app.core.connectionsystem.ClientType;
+import app.core.connectionsystem.LoginManager;
 import app.core.entities.Category;
 import app.core.entities.Company;
 import app.core.entities.Coupon;
@@ -13,49 +15,60 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class CompanyServiceTest {
+
     @Autowired
-    CompanyService companyService;
-    Company company1 = new Company(1, "Intel", "Intel@gmail.com", "aaabbb");
-    Company company2 = new Company(2, "Applied Materials", "AMAT@gmail.com", "aaabbb");
+    LoginManager loginManager;
+
+    Company company1 = Company.builder().id(1).name("Intel").email("Intel@gmail.com").password("aaabbb").build();
+    Company company2 = Company.builder().id(2).name("Applied Materials").email("AMAT@gmail.com").password("aaabbb").build();
     Category category = Category.Restaurant;
     Category category1 = Category.Food;
     Category category2 = Category.Electricity;
     String startDate = "2023-01-15";
-    String endDate = "2023-02-27";
+    String endDate = "2023-03-27";
     Date start = Date.valueOf(startDate);
     Date end = Date.valueOf(endDate);
-
-    Coupon coupon = new Coupon(0, company1, category, "Discount on supermarket ! ", "60% less on price ! ", start, end, 200, 1000, "image");
-    Coupon coupon1 = new Coupon(0, company1, category1, "Discount on chef meal ! ", "60% less on price ! ", start, end, 200, 1000, "image");
-    Coupon coupon2 = new Coupon(0, company1, category2, "Discount on toaster oven ! ", "60% less on price ! ", start, end, 200, 1000, "image");
-    Coupon coupon3 = new Coupon(0, company2, category, "Discount on supermarket ! ", "60% less on price ! ", start, end, 200, 1000, "image");
-    Coupon coupon4 = new Coupon(0, company2, category1, "Discount on chef meal ! ", "60% less on price ! ", start, end, 200, 1000, "image");
-    Coupon coupon5 = new Coupon(0, company2, category2, "Discount on toaster oven ! ", "60% less on price ! ", start, end, 200, 1000, "image");
+    Coupon coupon = Coupon.builder().id(0).company(company1).category(category).title("Discount on supermarket ! ").description("60% less on price ! ").startDate(start).endDate(end).amount(200).price(1000).image("image").build();
+    Coupon coupon1 = Coupon.builder().id(0).company(company1).category(category1).title("Discount on chef meal ! ").description("60% less on price ! ").startDate(start).endDate(end).amount(200).price(1000).image("image").build();
+    Coupon coupon2 = Coupon.builder().id(0).company(company1).category(category2).title("Discount on toaster oven ! ").description("60% less on price ! ").startDate(start).endDate(end).amount(200).price(1000).image("image").build();
+    Coupon coupon3 = Coupon.builder().id(0).company(company2).category(category).title("Discount on supermarket ! ").description("60% less on price ! ").startDate(start).endDate(end).amount(200).price(1000).image("image").build();
+    Coupon coupon4 = Coupon.builder().id(0).company(company2).category(category1).title("Discount on chef meal ! ").description("60% less on price ! ").startDate(start).endDate(end).amount(200).price(1000).image("image").build();
+    Coupon coupon5 = Coupon.builder().id(0).company(company2).category(category2).title("Discount on toaster oven ! ").description("60% less on price ! ").startDate(start).endDate(end).amount(200).price(1000).image("image").build();
 
     @Test
     void login() {
         System.out.println("Test 1 started !");
         String email = "Intel@gmail.com";
         String password = "aaabbb";
+        CompanyService companyService = (CompanyService) loginManager.login(email, password, ClientType.Company);
         assertTrue(companyService.login(email, password));
+        String email1 = "AMAT@gmail.com";
+        String password1 = "aaabbb";
+        CompanyService companyService1 = (CompanyService) loginManager.login(email1, password1, ClientType.Company);
+        assertTrue(companyService1.login(email1, password1));
         System.out.println("Test 1 completed !");
     }
 
     @Test
     void addCoupon() {
         System.out.println("Test 2 started !");
-        assertAll(() -> companyService.addCoupon(coupon));
-        assertAll(() -> companyService.addCoupon(coupon1));
-        assertAll(() -> companyService.addCoupon(coupon2));
-        assertAll(() -> companyService.addCoupon(coupon3));
-        assertAll(() -> companyService.addCoupon(coupon4));
-        assertAll(() -> companyService.addCoupon(coupon5));
+        CompanyService companyService1 = (CompanyService) loginManager.login("Intel@gmail.com", "aaabbb", ClientType.Company);
+        CompanyService companyService2 = (CompanyService) loginManager.login("AMAT@gmail.com", "aaabbb", ClientType.Company);
+        assertAll(() -> companyService1.addCoupon(coupon));
+        assertAll(() -> companyService1.addCoupon(coupon1));
+        assertAll(() -> companyService1.addCoupon(coupon2));
+        assertAll(() -> companyService2.addCoupon(coupon3));
+        assertAll(() -> companyService2.addCoupon(coupon4));
+        assertAll(() -> companyService2.addCoupon(coupon5));
         System.out.println("Test 2 completed !");
     }
 
     @Test
     void updateCoupon() {
         System.out.println("Test 3 started !");
+        String email = "Intel@gmail.com";
+        String password = "aaabbb";
+        CompanyService companyService = (CompanyService) loginManager.login(email, password, ClientType.Company);
         assertAll(() -> companyService.updateCoupon(coupon));
         System.out.println("Test 3 completed !");
     }
@@ -63,6 +76,9 @@ class CompanyServiceTest {
     @Test
     void deleteCoupon() {
         System.out.println("Test 4 started !");
+        String email = "Intel@gmail.com";
+        String password = "aaabbb";
+        CompanyService companyService = (CompanyService) loginManager.login(email, password, ClientType.Company);
         assertAll(() -> companyService.deleteCoupon(coupon));
         System.out.println("Test 4 completed !");
     }
@@ -70,9 +86,9 @@ class CompanyServiceTest {
     @Test
     void getCompanyCoupons() {
         System.out.println("Test 5 started !");
-        String email = "AMAT@gmail.com";
+        String email = "Intel@gmail.com";
         String password = "aaabbb";
-        companyService.login(email, password);
+        CompanyService companyService = (CompanyService) loginManager.login(email, password, ClientType.Company);
         assertAll(() -> System.out.println(companyService.getCompanyCoupons()));
         System.out.println("Test 5 completed !");
     }
@@ -82,7 +98,7 @@ class CompanyServiceTest {
         System.out.println("Test 6 started !");
         String email = "Intel@gmail.com";
         String password = "aaabbb";
-        companyService.login(email, password);
+        CompanyService companyService = (CompanyService) loginManager.login(email, password, ClientType.Company);
         assertAll(() -> System.out.println(companyService.getCompanyCoupons(category)));
         System.out.println("Test 6 completed !");
     }
@@ -92,7 +108,7 @@ class CompanyServiceTest {
         System.out.println("Test 7 started !");
         String email = "Intel@gmail.com";
         String password = "aaabbb";
-        companyService.login(email, password);
+        CompanyService companyService = (CompanyService) loginManager.login(email, password, ClientType.Company);
         assertAll(() -> System.out.println(companyService.getCompanyCoupons(1001)));
         System.out.println("Test 7 completed !");
     }
@@ -102,7 +118,7 @@ class CompanyServiceTest {
         System.out.println("Test 8 started !");
         String email = "Intel@gmail.com";
         String password = "aaabbb";
-        companyService.login(email, password);
+        CompanyService companyService = (CompanyService) loginManager.login(email, password, ClientType.Company);
         assertAll(() -> System.out.println(companyService.getCompanyDetails()));
         System.out.println("Test 8 completed !");
     }

@@ -13,18 +13,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+
 
 @Data
 @Entity
+@EqualsAndHashCode(of = "id")
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
-//@ToString(exclude = "coupons")
+@Builder
 public class Customer {
 
     @Id
@@ -37,17 +34,6 @@ public class Customer {
     private String password;
 
     @ManyToMany(cascade = {CascadeType.DETACH}, fetch = FetchType.EAGER)
-    @JoinTable(name = "customer_coupon", joinColumns = {@JoinColumn(name = "customer_id")}, inverseJoinColumns = {
-            @JoinColumn(name = "coupon_id")})
+    @JoinTable(name = "customer_coupon", joinColumns = {@JoinColumn(name = "customer_id")}, inverseJoinColumns = {@JoinColumn(name = "coupon_id")})
     private List<Coupon> coupons;
-
-    public Customer(int id, String firstName, String lastName, String email, String password) {
-        super();
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-    }
-
 }

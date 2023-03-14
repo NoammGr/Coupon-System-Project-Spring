@@ -1,5 +1,7 @@
 package app.core.servcies;
 
+import app.core.connectionsystem.ClientType;
+import app.core.connectionsystem.LoginManager;
 import app.core.entities.Category;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class CustomerServiceTest {
-
     @Autowired
-    CustomerService customerService;
+    LoginManager loginManager;
 
     Category category = Category.Restaurant;
 
@@ -21,6 +22,7 @@ class CustomerServiceTest {
         System.out.println("Test 1 started !");
         String email = "NoamDov@gmail.com";
         String password = "12343123";
+        CustomerService customerService = (CustomerService) loginManager.login(email, password, ClientType.Customer);
         assertTrue(customerService.login(email, password));
         System.out.println("Test 1 completed !");
     }
@@ -28,9 +30,9 @@ class CustomerServiceTest {
     @Test
     void purchaseCoupon() {
         System.out.println("Test 2 started !");
-        String email = "DovNoam@gmail.com";
+        String email = "NoamDov@gmail.com";
         String password = "12343123";
-        customerService.login(email, password);
+        CustomerService customerService = (CustomerService) loginManager.login(email, password, ClientType.Customer);
         assertAll(() -> customerService.purchaseCoupon(1));
         assertAll(() -> customerService.purchaseCoupon(2));
         assertAll(() -> customerService.purchaseCoupon(3));
@@ -42,9 +44,9 @@ class CustomerServiceTest {
     @Test
     void getCustomerCoupon() {
         System.out.println("Test 3 started !");
-        String email = "DovNoam@gmail.com";
+        String email = "NoamDov@gmail.com";
         String password = "12343123";
-        customerService.login(email, password);
+        CustomerService customerService = (CustomerService) loginManager.login(email, password, ClientType.Customer);
         assertAll(() -> System.out.println(customerService.getCustomerCoupon()));
         System.out.println("Test 3 completed !");
     }
@@ -52,9 +54,9 @@ class CustomerServiceTest {
     @Test
     void testGetCustomerCoupon() {
         System.out.println("Test 4 started !");
-        String email = "DovNoam@gmail.com";
+        String email = "NoamDov@gmail.com";
         String password = "12343123";
-        customerService.login(email, password);
+        CustomerService customerService = (CustomerService) loginManager.login(email, password, ClientType.Customer);
         assertAll(() -> System.out.println(customerService.getCustomerCoupon(category)));
         System.out.println("Test 4 completed !");
     }
@@ -62,9 +64,9 @@ class CustomerServiceTest {
     @Test
     void testGetCustomerCoupon1() {
         System.out.println("Test 5 started !");
-        String email = "DovNoam@gmail.com";
+        String email = "NoamDov@gmail.com";
         String password = "12343123";
-        customerService.login(email, password);
+        CustomerService customerService = (CustomerService) loginManager.login(email, password, ClientType.Customer);
         assertAll(() -> System.out.println(customerService.getCustomerCoupon(1001)));
         System.out.println("Test 5 completed !");
     }
@@ -72,9 +74,9 @@ class CustomerServiceTest {
     @Test
     void getCustomerDetails() {
         System.out.println("Test 6 started !");
-        String email = "DovNoam@gmail.com";
+        String email = "NoamDov@gmail.com";
         String password = "12343123";
-        customerService.login(email, password);
+        CustomerService customerService = (CustomerService) loginManager.login(email, password, ClientType.Customer);
         assertAll(() -> System.out.println(customerService.getCustomerDetails()));
         System.out.println("Test 6 completed !");
     }

@@ -2,6 +2,7 @@ package app.core.tests;
 
 import java.sql.Date;
 
+import app.core.connectionsystem.ClientType;
 import app.core.connectionsystem.LoginManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -46,53 +47,62 @@ public class Test implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        Company company1 = new Company(1, "aaa", "aaabbb@gmail.com", "aaaabbbb");
-//		  Company company2 = new Company(0, "bbb", "bbb@gmail.com", "bbbaaa");
-//		  Company company3 = new Company(0, "ccc", "ccc@gmail.com", "cccbbb");
-//        Company company4 = new Company(4, "ddd", "ddd@gmail.com", "dddccc");
-//		  Company company5 = new Company(5, "eee", "eee@gmail.com", "dddeee");
-//        Company company6 = new Company(10, "fff", "ffff@gmail.com", "fffddd");
+        Company company1 = Company.builder().id(1).name("Intel").email("Intel@gmail.com").password("aaabbb").build();
+        Company company2 = Company.builder().id(2).name("Applied Materials").email("AMAT@gmail.com").password("aaabbb").build();
 
-//        Category category = Category.Restaurant;
-//        String s = "2022-11-18";
-//        Date date = Date.valueOf(s);
+        Customer customer1 = Customer.builder().id(0).firstName("Noam").lastName("Dov").email("NoamDov@gmail.com").password("12343123").coupons(null).build();
+        Customer customer2 = Customer.builder().id(0).firstName("Dov").lastName("Noam").email("DovNoam@gmail.com").password("12343123").coupons(null).build();
 
-//        Coupon coupon = new Coupon(0, company1, category, "Something new ", "Something new ", date, date, 200, 1000, "image");
-//        Customer customer = new Customer(0, "Eldar", "JB", "EldarJB@gmail.com", "12314321");
-//        Customer customer1 = new Customer(2, "Eli", "Nymrod", "EliNymrodNissim@gmail.com", "12314321");
+        Category category = Category.Restaurant;
+        Category category1 = Category.Food;
+        Category category2 = Category.Electricity;
+        String startDate = "2023-01-15";
+        String endDate = "2023-03-27";
+        Date start = Date.valueOf(startDate);
+        Date end = Date.valueOf(endDate);
 
+        Coupon coupon = Coupon.builder().id(0).company(null).category(category).title("Discount on supermarket ! ").description("60% less on price ! ").startDate(start).endDate(end).amount(200).price(1000).image("image").build();
+        Coupon coupon1 = Coupon.builder().id(0).company(null).category(category1).title("Discount on chef meal ! ").description("60% less on price ! ").startDate(start).endDate(end).amount(200).price(1000).image("image").build();
+        Coupon coupon2 = Coupon.builder().id(0).company(null).category(category2).title("Discount on toaster oven ! ").description("60% less on price ! ").startDate(start).endDate(end).amount(200).price(1000).image("image").build();
+
+        // Repositories //
 //		  companyRepository.save(company1);
 //		  companyRepository.save(company2);
 //		  companyRepository.save(company3);
 //		  companyRepository.save(company4);
-
 //		  couponRepository.save(coupon);
-
 //		  customerRepository.save(customer);
 
-//        customerService.login("EldarJB@gmail.com", "12314321");
+        // Customer Service //
+//        CustomerService customerService = (CustomerService) loginManager.login("EldarJB@gmail.com", "12314321", ClientType.Customer);
+//        customerService.login("EldarJB@gmail.com", "12314321"); // you can use it without the login manger to see if it works !
 //        customerService.purchaseCoupon(1);
 //        System.out.println(customerService.getCustomerCoupon());
 //        System.out.println(customerService.getCustomerCoupon(category));
-//        System.out.println(customerService.getCustomerCoupon(1000)); // need to check with Eldar how to make it right !
+//        System.out.println(customerService.getCustomerCoupon(1000));
 //        System.out.println(customerService.getCustomerDetails());
 
-//        companyService.login("aaabbb@gmail.com", "aaaabbbb");
-//        companyService.addCoupon(coupon);
+        // Company Service //
+//        CompanyService companyService = (CompanyService) loginManager.login("Intel@gmail.com", "aaabbb", ClientType.Company);
+//        companyService.login("Intel@gmail.com", "aaabbb"); // you can use it without the login manger to see if it works !
+//        companyService.addCoupon(coupon1);
+//        companyService.addCoupon(coupon2);
 //        companyService.updateCoupon(coupon);
 //        companyService.deleteCoupon(coupon);
 //        System.out.println(companyService.getCompanyCoupons());
 //        System.out.println(companyService.getCompanyCoupons(category));
-//        System.out.println(companyService.getCompanyCoupons(1000)); // need to check with Eldar how to make it right !
+//        System.out.println(companyService.getCompanyCoupons(1000));
 //        System.out.println(companyService.getCompanyDetails());
 
-//        adminService.login("admin@admin.com", "admin");
-//        adminService.addCompany(company6);
-//        adminService.updateCompany(company6);
-//        adminService.deleteCompany(company6);
+        // Admin Service //
+//        AdminService adminService = (AdminService) loginManager.login("admin@admin.com", "admin", ClientType.Administrator);
+//        adminService.login("admin@admin.com", "admin"); // you can use it without the login manger to see if it works !
+//        adminService.addCompany(company1);
+//        adminService.updateCompany(company2);
+//        adminService.deleteCompany(company1);
 //        System.out.println(adminService.getAllCompanies());
 //        System.out.println(adminService.getOneCompany(1));
-//        adminService.addCustomer(customer1);
+//        adminService.addCustomer(customer2);
 //        adminService.updateCustomer(customer1);
 //        adminService.deleteCustomer(customer1);
 //        System.out.println(adminService.getAllCustomers());
