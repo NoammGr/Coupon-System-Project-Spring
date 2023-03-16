@@ -103,9 +103,8 @@ public class AdminService extends ClientService {
 
     public void deleteCustomer(Customer customer) throws CouponSystemException {
         customerRepository.findById(customer.getId()).orElseThrow(() -> new CouponSystemException("Customer doesn't exist !"));
-        couponRepository.deleteAllCouponsByCustomersId(customer.getId());
+        customerRepository.deleteCouponsById(customer.getId());
         System.out.println("All customer coupons has been deleted ! ");
-        customerRepository.deleteById(customer.getId());
         System.out.println("Customer deleted successfully !");
     }
 

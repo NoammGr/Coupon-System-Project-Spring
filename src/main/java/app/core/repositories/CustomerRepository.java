@@ -19,4 +19,5 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
     boolean existsByCouponsId(int couponId);
 
+    void deleteCouponsById(int id);
 }
