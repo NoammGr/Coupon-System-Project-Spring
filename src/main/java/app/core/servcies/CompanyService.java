@@ -7,6 +7,7 @@ import app.core.exceptions.CouponSystemException;
 import app.core.repositories.CompanyRepository;
 import app.core.repositories.CouponRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -16,6 +17,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
+@Scope("prototype")
 public class CompanyService extends ClientService {
 
     private Company company;

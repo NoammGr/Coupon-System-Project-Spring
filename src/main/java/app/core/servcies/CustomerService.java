@@ -7,6 +7,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import app.core.entities.Category;
@@ -18,6 +19,7 @@ import app.core.repositories.CustomerRepository;
 
 @Service
 @Transactional
+@Scope("prototype")
 public class CustomerService extends ClientService {
 
     private Customer customer;

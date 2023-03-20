@@ -7,19 +7,13 @@ import app.core.servcies.AdminService;
 import app.core.servcies.ClientService;
 import app.core.servcies.CompanyService;
 import app.core.servcies.CustomerService;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 @Component
 public class LoginManager {
-
     @Autowired
-    AdminService adminService;
-
-    @Autowired
-    CompanyService companyService;
-
-    @Autowired
-    CustomerService customerService;
+    ApplicationContext ctx;
 
     public LoginManager() {
 
@@ -37,20 +31,23 @@ public class LoginManager {
     public ClientService login(String name, String password, ClientType client) throws CouponSystemException {
 
         if (client == (ClientType.Administrator)) {
+            AdminService adminService = ctx.getBean(AdminService.class);
             if (adminService.login(name, password)) {
-                return this.adminService;
+                return adminService;
             }
         }
 
         if (client == (ClientType.Company)) {
+            CompanyService companyService = ctx.getBean(CompanyService.class);
             if (companyService.login(name, password)) {
-                return this.companyService;
+                return companyService;
             }
         }
 
         if (client == (ClientType.Customer)) {
+            CustomerService customerService = ctx.getBean(CustomerService.class);
             if (customerService.login(name, password)) {
-                return this.customerService;
+                return customerService;
             }
         }
         throw new CouponSystemException("Wrong email or password please try again !");

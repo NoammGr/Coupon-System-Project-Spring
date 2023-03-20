@@ -2,15 +2,14 @@ package app.core.servcies;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import app.core.entities.Company;
-import app.core.entities.Coupon;
 import app.core.exceptions.CouponSystemException;
 import app.core.entities.Customer;
 import app.core.repositories.CompanyRepository;
@@ -19,6 +18,7 @@ import app.core.repositories.CustomerRepository;
 
 @Service
 @Transactional
+@Scope("prototype")
 public class AdminService extends ClientService {
 
     @Autowired
